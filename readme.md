@@ -6,6 +6,8 @@
 ╰─ tree                                                                                                                    ─╯
 .
 ├── 3.2.8-packet-tracer---investigate-a-vlan-implementation.pdf
+├── 97113519-3-4-5.pka
+├── 97113519-3.12-vlan-config.pka
 ├── 97113519-lab-1.pkt
 ├── 97113519-opdracht-implememt-a-small-network.pka
 ├── 97113519_20231207_eerste_opdracht.pkt
@@ -13,7 +15,7 @@
 ├── cli.txt
 └── readme.md
 
-1 directory, 7 files
+1 directory, 9 files
 
 
 ```
