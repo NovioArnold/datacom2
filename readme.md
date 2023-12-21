@@ -22,6 +22,20 @@
 
 Moet meer informatie over hoofdstuk Who hears what.
 
+### show switchport information
+
+```bash
+S1# show interfaces fa0/18 switchport
+
+```
+
+### Show all vlans
+
+```bash
+S1# show vlan summary
+
+```
+
 ### Create Vlan
 
 ```bash
@@ -58,4 +72,4 @@ S3(config-if)# switchport voice vlan 150
 S3(config-if)# end
 ```
 
-## Sourcesi
+## Sources
