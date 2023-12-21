@@ -72,4 +72,30 @@ S3(config-if)# switchport voice vlan 150
 S3(config-if)# end
 ```
 
-## Sources
+## Trunking
+
+### Trunking setup
+
+```bash
+S1(config)# interface fastEthernet 0/1
+S1(config-if)# switchport mode trunk
+S1(config-if)# switchport trunk native vlan 99
+S1(config-if)# switchport trunk allowed vlan 10,20,30,99
+S1(config-if)# end
+```
+
+### Trunking config confirm
+
+```bash
+S1# show interfaces fa0/1 switchport
+```
+
+### Trunking reset to default
+
+```bash
+S1(config)# interface fa0/1
+S1(config-if)# no switchport trunk allowed vlan
+S1(config-if)# no switchport trunk native vlan
+S1(config-if)# end
+
+```
