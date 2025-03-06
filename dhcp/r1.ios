@@ -1,0 +1,40 @@
+enable
+configure terminal
+hostname R1
+no ip domain-lookup
+enable secret class
+line console 0
+ password cisco
+ login
+exit
+line vty 0 4
+ password cisco
+ login
+exit
+service password-encryption
+banner motd #Unauthorized access is prohibited#
+clock set HH:MM:SS MONTH DAY YEAR
+write memory
+
+interface g0/0/1
+no shutdown
+exit
+
+interface g0/0/1.100
+encapsulation dot1Q 100
+ip address 192.168.1.1 255.255.255.240
+description Clients VLAN 100
+exit
+
+interface g0/0/1.200
+encapsulation dot1Q 200
+ip address 192.168.1.66 255.255.255.192
+description Management VLAN 200
+exit
+
+interface g0/0/1.1000
+encapsulation dot1Q 1000 native
+description Native VLAN
+exit
+
+do show ip interface brief
