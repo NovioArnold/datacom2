@@ -1,46 +1,68 @@
 enable
 configure terminal
+
+hostname s2
+
+enable secret class
+
+line console 0
+    password cisco
+    login
+
+line vty 0 4
+    password cisco
+    login
+
+service password-encryption
+
+banner motd #Unauthorized access prohibited
+
+
 vlan 100
-name clients
-exit
+    name clients
+    exit
 vlan 200
-name management
-exit
+    name management
+    exit
 vlan 999
-name parking-lot
-exit
+    name parking-lot
+    exit
 vlan 1000
-name native
-exit
+    name native
+    exit
+
 interface FastEthernet0/18
-switchport mode access
-switchport access vlan 1
-no shutdown
-exit
+    switchport mode access
+    switchport access vlan 1
+    no shutdown 
+    exit
+
 interface FastEthernet0/6
-switchport mode trunk
-switchport trunk native vlan 1000
-switchport trunk allowed vlan 200,100
-no shutdown
-exit
+    switchport mode trunk
+    switchport trunk native vlan 1000
+    switchport trunk allowed vlan 200,100
+    no shutdown
+    exit
+
 interface range FastEthernet0/1 - 5
-switchport mode access
-switchport access vlan 999
-shutdown
-exit
+    switchport mode access
+    switchport access vlan 999
+    shutdown
+    exit
 interface range FastEthernet0/7 - 17
-switchport mode access
-switchport access vlan 999
-shutdown
+    switchport mode access
+    switchport access vlan 999
+    shutdown
 interface range FastEthernet0/19 - 24
-switchport mode access
-switchport access vlan 999
-shutdown
-exit
+    switchport mode access
+    switchport access vlan 999
+    shutdown
+    exit
 interface range GigabitEthernet0/1 - 2
-switchport mode access
-switchport access vlan 999
-shutdown
-exit
+    switchport mode access
+    switchport access vlan 999
+    shutdown
+    exit
+
 interface vlan 200
-ip address 192
+    ip address 192.168.1.69 255.255.255.224

@@ -14,27 +14,51 @@ exit
 service password-encryption
 banner motd #Unauthorized access is prohibited#
 clock set HH:MM:SS MONTH DAY YEAR
-write memory
 
-interface g0/0/1
+interface g0/0
+ip address 10.0.0.1 255.255.255.252
 no shutdown
 exit
 
-interface g0/0/1.100
+interface g0/1
+no shutdown
+exit
+
+interface g0/1.100
 encapsulation dot1Q 100
 ip address 192.168.1.1 255.255.255.240
 description Clients VLAN 100
 exit
 
-interface g0/0/1.200
+interface g0/1.200
 encapsulation dot1Q 200
 ip address 192.168.1.66 255.255.255.192
 description Management VLAN 200
 exit
 
-interface g0/0/1.1000
+interface g0/1.1000
 encapsulation dot1Q 1000 native
 description Native VLAN
 exit
 
 do show ip interface brief
+
+ip dhcp excluded-address 192.168.1.1 192.168.1.8
+ip dhcp excluded-address 192.168.1.63
+ip dhcp pool SubnetA
+network 192.168.1.0 255.255.255.192
+default-router 192.268.1.1
+dns-server
+domain-name ccna-lab.com
+lease 2 12 30
+ip dhcp pool SubnetC
+network 192.168.1.96 255.255.255.240
+default-router 192.168.1.97
+domain-name ccna-lab.com
+lease 2 12 30
+dhcp excluded-address 192.168.1.97 192.168.1.101
+dhcp excluded-address 192.168.1.110
+
+show ip dhcp pool
+show ip dhcp bindings
+show ip dhcp server statistics

@@ -1,7 +1,6 @@
 enable
 configure terminal
 hostname R2
-no ip domain-lookup
 enable secret class
 line console 0
  password cisco
@@ -14,10 +13,10 @@ exit
 service password-encryption
 banner motd #Unauthorized access is prohibited#
 clock set HH:MM:SS MONTH DAY YEAR
-write memory
+
 
 interface g0/0/1
-ip address 192.168.1.71 255.255.255.240
+ip helper-address 10.0.0.1
 no shutdown
 exit
 
