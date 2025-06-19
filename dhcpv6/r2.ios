@@ -1,0 +1,44 @@
+enable
+configure terminal
+hostname R2
+no ip domain-lookup
+enable secret class
+line console 0
+    password cisco
+    login
+exit
+line vty 0 4
+    password cisco
+    login
+exit
+service password-encryption
+banner motd #Unauthorized access is prohibited#
+clock set HH:MM:SS MONTH DAY YEAR
+enable ipv6 unicast-routing
+interface g0/0
+    ipv6 address 2001:DB8:acad:2::2/64
+    ipv6 link-local address FE80::2
+    no shutdown
+exit
+interface g0/1
+    ipv6 address 2001:DB8:acad:3::1/64
+    ipv6 link-local address FE80::1
+    no shutdown
+exit
+ipv6 route ::/0 2001:DB8:acad:2::1
+ping6 2001:DB8:acad:1::1
+copy running-config startup-config
+interface g0/1
+    ipv6 nd managed-config-flag
+    ipv6 dhcp relay destination 2001:DB8:acad:2::1 g0/0
+exit
+copy running-config startup-config
+do show ipv6 interface brief
+do show ipv6 dhcp binding
+do show ipv6 dhcp pool
+do show ipv6 dhcp statistics
+do show ipv6 route
+do show ipv6 dhcp relay statistics
+do show ipv6 dhcp relay binding
+do show ipv6 dhcp relay pool
+ping6 2001:DB8:acad:1::1

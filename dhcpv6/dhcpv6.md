@@ -14,7 +14,7 @@ dcpv6 server configuration is done by following steps:
 enable
 conf
 host r1
-pv6 unicast-routing
+ipv6 unicast-routing
 ipv6 dhcp pool IPV6-STATELESS
     dns-server 2001:db8:acad:1::254
     domain-name example.com

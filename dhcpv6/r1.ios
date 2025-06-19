@@ -1,0 +1,63 @@
+enable
+configure terminal
+hostname R1
+no ip domain-lookup
+enable secret class
+line console 0
+    password cisco
+    login
+exit
+line vty 0 4
+    password cisco
+    login
+exit
+service password-encryption
+banner motd #Unauthorized access is prohibited#
+clock set HH:MM:SS MONTH DAY YEAR
+interface g0/0
+    ipv6 address 2001:DB8:acad:1::1/64
+    ipv6 link-local address FE80::1
+    no shutdown
+exit
+ interface g0/1
+    ipv6 address 2001:DB8:acad:2::1/64
+    ipv6 link-local address FE80::1
+    no shutdown
+exit
+ipv6 route ::/0 2001:DB8:acad:2::2
+ping6 2001:DB8:acad:3::1
+copy running-config startup-config
+ipv6 unicast-routing
+ipv6 dhcp pool R1-STATELESS
+    dns-server 2001:DB8:acad:3::254
+    domain-name STATELESS.com
+exit
+interface g0/1
+    ipv6 nd other-config-flag
+    ipv6 dhcp server R1-STATELESS
+exit
+copy running-config startup-config
+do show ipv6 interface brief
+do show ipv6 dhcp binding
+do show ipv6 dhcp pool
+do show ipv6 dhcp statistics
+do show ipv6 route
+do show ipv6 dhcp server statistics
+do show ipv6 dhcp server binding
+do show ipv6 dhcp server pool
+
+ipv6 dhcp pool R2-STATEFUL
+    address prefix 2001:DB8:acad:3:aaa::/80
+    dns-server 2001:DB8:acad::254
+    domain-name STATEFUL.com
+exit
+interface g0/0
+    ipv6 dhcp server R2-STATEFUL
+exit
+copy running-config startup-config
+do show ipv6 interface brief
+do show ipv6 dhcp binding
+do show ipv6 dhcp pool
+do show ipv6 dhcp server binding
+do show ipv6 dhcp server pool
+do show ipv6 dhcp server statistics
