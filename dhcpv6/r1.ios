@@ -13,7 +13,7 @@ line vty 0 4
 exit
 service password-encryption
 banner motd #Unauthorized access is prohibited#
-clock set HH:MM:SS MONTH DAY YEAR
+clock timezone CET +1
 interface g0/0
     ipv6 address 2001:DB8:acad:1::1/64
     ipv6 link-local address FE80::1

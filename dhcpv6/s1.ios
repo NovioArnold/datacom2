@@ -1,0 +1,17 @@
+enable
+configure terminal
+enable secret class
+hostname S1
+no ip domain-lookup
+line console 0
+    password cisco
+    login
+exit
+line vty 0 4
+    password cisco
+    login
+exit
+service password-encryption
+banner motd #Unauthorized access is prohibited#
+clock timezone CET +1
+copy running-config startup-config
